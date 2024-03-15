@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IExchangeRateRequest } from '../interfaces/currency';
+import { IToken } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root',
@@ -9,10 +10,11 @@ export class CurrencyService {
 
   constructor(private http: HttpClient) { }
 
-  getCurrency() {
+  getCurrency(token: IToken) {
     const headers = new HttpHeaders({
       "Accept": 'application/json',
       'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token.token}`
     });
 
     const requestOptions = { headers: headers };
@@ -20,14 +22,15 @@ export class CurrencyService {
     return this.http.get("http://localhost:8080/api/exchange/currency", requestOptions);
   }
 
-  httpCalculate(request: IExchangeRateRequest) {
+  httpCalculate(request: IExchangeRateRequest, token: IToken) {
 
-    let headers = new HttpHeaders();
+    const headers = new HttpHeaders({
+      "Accept": 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token.token}`
+    });
 
-    headers.set('content-type', 'application/json');
-    headers.set('Accept', 'application/pdf');
-
-    let requestOptions = { headers: headers };
+    const requestOptions = { headers: headers };
 
     return this.http.post("http://localhost:8080/api/exchange/calculate", request, requestOptions);
   }
