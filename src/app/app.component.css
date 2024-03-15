@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* Centra verticalmente en la pantalla */
+  height: 100vh;
+  /* Establece la altura al 100% de la altura de la ventana */
+}
+
+.input-field,
+.select-field {
+  width: 300px;
+  /* ajusta el ancho según sea necesario */
+  margin-bottom: 20px;
+  /* añade espacio entre los campos */
+}
+
+.button {
+  margin-bottom: 20px;
+  /* añade espacio entre el botón y el siguiente campo */
+}
